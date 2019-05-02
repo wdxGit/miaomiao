@@ -11,6 +11,9 @@ Vue.filter('setWH', (url, arg) => {
     return url.replace(/w\.h/, arg)
 })
 
+import scroller from '@/components/Scroller'
+Vue.component('scroller', scroller)
+
 import Cube from 'cube-ui'
 
 Vue.config.productionTip = false

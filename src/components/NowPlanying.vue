@@ -1,7 +1,8 @@
 <template>
-<div class="movie_body">
+<div class="movie_body" ref="movie_body">
+  <scroller>
   <ul>
-    <li v-for="(item, index) in movieList" :key="index">
+    <li v-for="(item, index) in movieList" :key="index" @tap="handleToDetail">
       <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
       <div class="info_list">
         <h2>{{item.nm}} <img v-if="item.version" src="@/assets/maxs.png" alt="" srcset=""></h2>
@@ -14,10 +15,12 @@
       </div>
     </li>
   </ul>
+  </scroller>
 </div>
 </template>
 
 <script type='text/ecmascript-6'>
+import BScroll from 'better-scroll';
 export default {
   name: 'NowPlaying',
   data() {
@@ -31,11 +34,23 @@ export default {
       let msg = res.data.msg;
       if(msg==='ok' ){
         this.movieList = res.data.data.movieList;
+        // this.$nextTick(()=>{
+        //   this.scroll = new BScroll(this.$refs.movie_body,{
+        //     tap:true,
+        //     probeType: 1
+        //   })
+        // })
+        
       }
     })
     .catch(err => {
       console.error(err); 
     })
+  },
+  methods: {
+    handleToDetail(){
+      console.log('handleToDetail')
+    }
   },
   components: {
 
@@ -44,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-#content .movie_body{ flex:1; overflow:auto;}
+.movie_body{ flex:1; overflow:auto;height: 520px;}
 .movie_body ul{ margin:0 12px; overflow: hidden;}
 .movie_body ul li{ margin-top:12px; display: flex; align-items:center; border-bottom: 1px #e6e6e6 solid; padding-bottom: 10px;}
 .movie_body .pic_show{ width:64px; height: 90px;}
