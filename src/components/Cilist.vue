@@ -15,6 +15,20 @@
         <div>折扣卡</div>
       </div>
     </li>
+    <li v-for="(item, index) in cinemas" :key="index">
+      <div>
+        <span>{{item.nm}}</span>
+        <span class="q"><span class="price">{{item.sellPrice}}</span> 元起</span>
+      </div>
+      <div class="address">
+        <span>{{item.addr}}</span>
+        <span>{{item.distance}}km</span>
+      </div>
+      <div class="card">
+        <div>小吃</div>
+        <div>折扣卡</div>
+      </div>
+    </li>
   </ul>
 </div>
 </template>
@@ -24,8 +38,25 @@ export default {
   name: 'Cilist',
   data() {
     return {
-
+      cinemas:[]
     };
+  },
+  mounted() {
+    let params={
+      cityId:'10'
+    }
+    this.axios.get('/api/cinemaList', {
+      params: {
+        ...params
+      }
+    })
+    .then(res => {
+      console.log(res);
+      const msg = res.data.msg;
+      if(msg === 'ok'){
+        this.cinemas = res.data.data.cinemas
+      }
+    })
   },
   components: {
 

@@ -7,6 +7,10 @@ import store from './stores'
 import axios from 'axios'
 Vue.prototype.axios = axios;
 
+Vue.filter('setWH', (url, arg) => {
+    return url.replace(/w\.h/, arg)
+})
+
 import Cube from 'cube-ui'
 
 Vue.config.productionTip = false
