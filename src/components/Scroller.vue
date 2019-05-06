@@ -1,26 +1,47 @@
 <template>
-  <div class="wrapper">
-    <slot></slot>
-  </div>
+    <div class="wrapper" ref="wrapper">
+        <slot></slot>
+    </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
 import BScroll from 'better-scroll';
 export default {
-  name:"Scroller",
-  data() {
-    return {
+    name : 'Scroller',
+    props : {
+        handleToScroll : {
+            type : Function,
+            default : function(){}
+        },
+        handleToTouchEnd : {
+            type : Function,
+            default : function(){}
+        }
+    },
+    mounted(){
+        var scroll = new BScroll( this.$refs.wrapper , {
+            tap : true,
+            probeType: 2
+        });
 
+        this.scroll = scroll;
+
+        scroll.on('scroll',(pos)=>{
+            this.handleToScroll(pos);
+        });
+
+        scroll.on('touchEnd',(pos)=>{
+            this.handleToTouchEnd(pos);
+        });
+    },
+    methods : {
+        toScrollTop(y){
+            this.scroll.scrollTo(0,y);
+        }
     }
-  },
-  components: {
-
-  }
 }
 </script>
 
 <style scoped>
-.wrapper{
-  height: 100%;
-}
+    .wrapper{ height:100%;}
 </style>

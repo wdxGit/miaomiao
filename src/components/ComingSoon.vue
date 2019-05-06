@@ -1,5 +1,7 @@
 <template>
 <div class="movie_body">
+  
+  <scroller>
   <ul>
     <li v-for="(item, index) in comingList" :key="index">
       <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
@@ -14,6 +16,7 @@
       </div>
     </li>
   </ul>
+  </scroller>
 </div>
 </template>
 

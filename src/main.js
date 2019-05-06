@@ -11,8 +11,16 @@ Vue.filter('setWH', (url, arg) => {
     return url.replace(/w\.h/, arg)
 })
 
-import scroller from '@/components/Scroller'
+import scroller from './components/Scroller'
 Vue.component('scroller', scroller)
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+import './assets/my-mint-ui.scss'
+Vue.use(MintUI)
+
+import loading from './components/loading.vue'
+Vue.component('loading', loading)
 
 import Cube from 'cube-ui'
 
