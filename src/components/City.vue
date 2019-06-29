@@ -14,10 +14,10 @@
 
     <mt-index-list>
       <mt-index-section index="热门">
-        <mt-cell v-for="(item, index) in hotList" :key="index" :title="item.nm" class="hot" @touchend.native="handleTocity(item.nm,item.id)"></mt-cell>
+        <mt-cell v-for="(item, index) in hotList" :key="index" :title="item.nm" class="hot" @click.native="handleTocity(item.nm,item.id)"></mt-cell>
       </mt-index-section>
       <mt-index-section :index="item.name" v-for="(item, index) in cityList" :key="index" style="clear:both;">
-        <mt-cell v-for="(item, index) in item.items" :key="index" :title="item.name" @touchend.native="handleTocity(item.name,item.value)"></mt-cell>
+        <mt-cell v-for="(item, index) in item.items" :key="index" :title="item.name" @click.native="handleTocity(item.name,item.value)"></mt-cell>
       </mt-index-section>
     </mt-index-list>
   </div>
